@@ -1,0 +1,38 @@
+.card-component{
+    display: flex; 
+     align-items: center;
+    justify-content: space-between;
+    font-weight: 100;
+}
+.card-component-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid;
+    border-radius: 5px;
+    
+}
+.card-component-div-weak{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 14px 5px 14px;
+    
+    border: 1px solid;
+    color:#4237c3 ;
+
+}
+.card-component-div-weak:hover{
+    background-color: #5A4FCF;
+    opacity: 0.5;
+
+}
+.pig{
+    box-shadow: 5px 5px 10px gray;
+}
+
+.card-component-text{
+    color: gray;
+}
+.card-component-head{
+    font-weight: 500;
+}

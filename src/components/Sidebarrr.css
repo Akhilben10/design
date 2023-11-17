@@ -1,0 +1,50 @@
+.sidebar-item:hover {
+    background-color: #87CEEB;
+  }
+.sidebar-item-end:hover {
+    background-color: #87CEEB;
+  }
+  .sidebar-item-end{
+    
+  }
+  .drawer-name{
+    padding-left: 20px;
+
+  }
+  .header-icons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+  .berry{
+    color:black ;
+    font-weight: bold;
+    margin-right: 100px;
+  }
+.Toolbar{
+  
+  background-color: white;
+  padding: 10px;
+}
+.searchbar{
+  align-items: start;
+  border: solid 1spx black;
+}
+.zoombutton:hover {
+  background-color:  #318CE7;
+  padding: 5px;
+  border-radius: 5px;
+}
+.zoombutton{
+  padding: 5px;
+  border-radius: 5px;
+  
+  background-color:#89CFF0 ;
+
+}
+/* .sidebar-position{
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+} */

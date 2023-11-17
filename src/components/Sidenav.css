@@ -1,0 +1,21 @@
+.zoombutton:hover {
+    background-color:  #318CE7;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  .zoombutton{
+    margin: 10px;
+    border-radius: 5px;
+    background-color:#89CFF0 ;
+  }
+  .zoom{
+    margin-left: 15rem;
+  }
+  .menu{
+    margin-left: 1rem;
+  }
+  .Header-logo{
+    height: 50px;
+    width: 50px;
+
+  }

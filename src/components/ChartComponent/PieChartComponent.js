@@ -38,7 +38,7 @@ function PieChartComponent() {
       chartType="PieChart"
       data={data}
       options={options}
-      height={"63vh"}
+      height={"60vh"}
       
     />
    

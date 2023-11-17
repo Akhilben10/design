@@ -294,7 +294,7 @@ const Header = ({ handleToggle }) => {
           aria-label="open drawer"
           onClick={handleToggle}
         >
-          <p className='berry'>BERRY</p>
+          <p className='berry'>GM Test</p>
           <MenuIcon className='zoombutton'/>
           
         </IconButton>

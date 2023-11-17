@@ -153,7 +153,7 @@ export default function Sidenav() {
               <img src="./icons/berry.jpg" className='Header-logo' />
 
             </Typography>
-            <h2 className='berry'>BERRY</h2>
+            <h2 className='berry'>GM Test</h2>
             <IconButton
               color="inherit"
               aria-label="open drawer"

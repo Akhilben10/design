@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import BarChartComponents from '../components/ChartComponent/BarChartComponent';
 import PieChartComponent from '../components/ChartComponent/PieChartComponent';
+import HorizontalBarComponent from '../components/ChartComponent/HorizontalBarComponent';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -64,8 +65,9 @@ export default function BasicGrid() {
         <Grid item xs={8}>
           <BarChartComponents/>
         </Grid>
-        <Grid item xs={4}>
-        <PieChartComponent/>
+        <Grid item xs={4} >
+        {/* <PieChartComponent height={"30vh"}/> */}
+        <HorizontalBarComponent/>
         </Grid>
       </Grid>
     </Box>

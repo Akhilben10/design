@@ -55,14 +55,6 @@ const CardComponent = () => {
                     <Grid item xs={1}></Grid>
                     <Grid item xs={2.5}>
                         <CardList/>
-                        {/* <Card className='pig'>
-                            <CardHeader title="28,600" />
-                            <CardContent>
-                                <Typography variant="body2" color="textSecondary">
-                                    28,600
-                                </Typography>
-                            </CardContent>
-                        </Card> */}
                     </Grid>
                 <Grid item xs={2.5}>
                     <Card>

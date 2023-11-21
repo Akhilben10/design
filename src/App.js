@@ -28,34 +28,10 @@ function App() {
   const classes= useStyles()
   return (
    
-    // <Box sx={{ flexGrow: 1 }}>
-    //   <Grid container spacing={1}>
-    //     <Grid item xs={1}>
-    //     {/* <Header handleToggle={handleToggle} /> */}
-    //     {/* <ResponsiveSidebar /> */}
-    //     <MiniDrawer />
-        
-    //     </Grid>
-    //     <Grid item xs={11}>
-    //     <br/>
-    //     <br/><br/><br/><br/>
-    //     <Router>
-    //       <Routes>
-    //            <Route path="/" exact element={<Analytics/>}/>
-    //            <Route path="/ddefault" exact element={<Ddefault/>}/>
-    //       </Routes>
-    //     </Router>
-        
-        
-    //     </Grid>
-    //   </Grid>
-    // </Box>
     <div  classes={{paper: classes.drawerPaper}} >
 
       <Sidenav />
-       {/* <Box component="main" sx={{ flexGrow: 1, p: 3  , mt:6}}> */}
-     
-      {/* </Box> */}
+    
     </div>
    
    

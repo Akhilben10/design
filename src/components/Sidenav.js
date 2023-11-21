@@ -28,14 +28,19 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import './Sidenav.css';
-import { BrowserRouter as Router, Routes, Route , NavLink } from "react-router-dom";
-import SpeedIcon from '@mui/icons-material/Speed';
+import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
+
+import HomeIcon from '@mui/icons-material/Home';
 import Theme from '@mui/icons-material';
 import { makeStyles } from '@material-ui/core';
 import { Hidden } from '@mui/material';
 import Statistics from '../RouterComponents/Statistics';
 import Users from '../RouterComponents/Users';
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import LastUpdatedTooltip from './TooltipComponent/Tooltip';
+import { SiPowerbi } from "react-icons/si";
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 
 const drawerWidth = 240;
 
@@ -103,8 +108,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
   }),
 );
-const useStyles = makeStyles((theam)=>({
-  drawerPaper:{
+const useStyles = makeStyles((theam) => ({
+  drawerPaper: {
     width: drawerWidth,
     overflow: 'hidden',
     '&::-webkit-scrollbar': {
@@ -117,7 +122,7 @@ export default function Sidenav() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   // const [menudata, setMenudata] = useState("Default");
-  const classes= useStyles()
+  const classes = useStyles()
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -128,23 +133,9 @@ export default function Sidenav() {
 
   const handleClick = (text) => {
     console.log('fffffffffffff', text)
-    navigate(`/${text}`)
+    navigate(`/${text.toLowerCase()}`)
   }
-  // const styles = (theme: Theme) =>
-  // createStyles({
-  //   scrollBar: {
-  //     '&::-webkit-scrollbar': {
-  //       width: '0.4em'
-  //     },
-  //     '&::-webkit-scrollbar-track': {
-  //       '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
-  //     },
-  //     '&::-webkit-scrollbar-thumb': {
-  //       backgroundColor: 'rgba(0,0,0,.1)',
-  //       outline: '1px solid slategrey'
-  //     }
-  //   }
-  // });
+
 
   return (
     <>
@@ -179,19 +170,22 @@ export default function Sidenav() {
                 <ZoomOutMapIcon sx={{ fontSize: "28px" }} className='zoombutton' />
               </IconButton>
 
-              <IconButton onClick={() => {navigate('/users')}} >
+              <IconButton onClick={() => { navigate('/users') }} >
                 <AccountCircleIcon sx={{ fontSize: "28px" }} className='zoombutton' />
               </IconButton>
 
               <IconButton   >
                 <SettingsIcon sx={{ fontSize: "28px" }} className='zoombutton' />
               </IconButton>
+
+              <LastUpdatedTooltip />
+
             </div>
 
           </Toolbar>
         </AppBar>
-        
-        <Drawer variant="permanent" open={open} classes={{paper: classes.drawerPaper}}>
+
+        <Drawer variant="permanent" open={open} classes={{ paper: classes.drawerPaper }}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -215,7 +209,7 @@ export default function Sidenav() {
                       justifyContent: 'center',
                     }}
                   >
-                    {index === 0 ? <SpeedIcon /> : <MailIcon />}
+                    {index === 0 ? <HomeIcon /> : <AnalyticsIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
@@ -224,7 +218,7 @@ export default function Sidenav() {
           </List>
           <Divider />
           <List>
-            {['Statistics', 'Data', 'Chart'].map((text, index) => (
+            {['Power-bi'].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: 'block' }} onClick={() => handleClick(text)}>
                 <ListItemButton
                   sx={{
@@ -240,7 +234,8 @@ export default function Sidenav() {
                       justifyContent: 'center',
                     }}
                   >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    
+                    {index % 2 === 0 ? <SiPowerbi /> : <MailIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
@@ -249,7 +244,7 @@ export default function Sidenav() {
           </List>
           <Divider />
           <List>
-            {['users', 'Customer', 'Chat', 'Kanban', 'Mail', "Calendar", "Contact", "E-commerce"].map((text, index) => (
+            {['users'].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: 'block' }} onClick={() => handleClick(text)}>
                 <ListItemButton
                   sx={{
@@ -265,7 +260,7 @@ export default function Sidenav() {
                       justifyContent: 'center',
                     }}
                   >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {index % 2 === 0 ? <PermIdentityIcon /> : <MailIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
@@ -274,7 +269,7 @@ export default function Sidenav() {
           </List>
           <Divider />
           <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+            {[].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: 'block' }} onClick={() => handleClick(text)}>
                 <ListItemButton
                   sx={{
@@ -298,10 +293,18 @@ export default function Sidenav() {
             ))}
           </List>
         </Drawer>
-    
+
+        <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 6 }}>
+          <Routes>
+            <Route path='/analytics' element={<Analytics />} />
+            <Route path='/home' element={<Ddefault />} />
+            <Route path='/power-bi' element={<Statistics />} />
+            <Route path='/users' element={<Users />} />
+          </Routes>
 
 
-        {/* <Drawer variant="permanent" open={open}>
+
+          {/* <Drawer variant="permanent" open={open}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -430,13 +433,7 @@ export default function Sidenav() {
           </List>
 
         </Drawer> */}
-        <Box component="main" sx={{ flexGrow: 1, p: 3  , mt:6}}>
-        <Routes>
-        <Route path='/analytics' exact  element={<Analytics />}/>
-        <Route path='/home' exact element={<Ddefault />}/>
-        <Route path='/Statistics' exact element={<Statistics />}/>
-        <Route path='/users' exact element={<Users />}/>
-      </Routes>
+
           {/* {
             menudata === "Analytics" && <Analytics />
           }

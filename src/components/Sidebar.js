@@ -109,7 +109,7 @@ import PrimarySearchAppBar from './SearchBar.js'
 // import { makeStyles } from '';
 // import { Link } from 'react-router-dom';\
 // const drawerWidth=640;
-// const styles = {
+// const styles = {      
 //   drawer: {
 //     width: drawerWidth,
 //     flexShrink: 0,

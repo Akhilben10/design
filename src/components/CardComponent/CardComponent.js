@@ -13,16 +13,14 @@ const CardComponent = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
-                <Grid item xs={1}>
-
-                </Grid>
-                <Grid item xs={2.5}>
+              
+                <Grid item xs={3}>
                     <h2 className='card-component-head'>Analytics</h2>
                     <p className='card-component-text'>KPI analysis for e-commerce</p>
                     
 
                 </Grid>
-                <Grid item xs={2.5} className='card-component'>
+                <Grid item xs={3} className='card-component'>
                     <div className="card-component-div">
                         <div className="card-component-div-weak">year</div>
                         <div className="card-component-div-weak">Month</div>
@@ -30,11 +28,11 @@ const CardComponent = () => {
                     </div>
 
                 </Grid>
-                <Grid item xs={2.5}>
+                <Grid item xs={3}>
 
 
                 </Grid>
-                <Grid item xs={2.5} className='card-component'>
+                <Grid item xs={3} className='card-component'>
                     {/* <ListItem button className="sidebar-item">
           <ListItemIcon>
             <CalendarMonthIcon /> 
@@ -44,19 +42,13 @@ const CardComponent = () => {
                     <CalendarMonthIcon /> <p>10 February, 2023</p><SearchIcon />
 
                 </Grid>
-                {/* <Grid item xs={1}>
-
-
-                </Grid>
-                <Grid item xs={1}>
-
-                </Grid> */}
+               
                 <Grid container spacing={2} className='mx-4'>
-                    <Grid item xs={1}></Grid>
-                    <Grid item xs={2.5}>
+                  
+                    <Grid item xs={3}>
                         <CardList/>
                     </Grid>
-                <Grid item xs={2.5}>
+                <Grid item xs={3}>
                     <Card>
                         <CardHeader title="64,12%" />
                         <CardContent>
@@ -67,7 +59,7 @@ const CardComponent = () => {
                     </Card>
 
                 </Grid>
-                <Grid item xs={2.5}>
+                <Grid item xs={3}>
                     <Card>
                         <CardHeader title="82,19%" />
                         <CardContent>
@@ -78,7 +70,7 @@ const CardComponent = () => {
                     </Card>
 
                 </Grid>
-                <Grid item xs={2.5}>
+                <Grid item xs={3}>
                     <Card>
                         <CardHeader title=" $5,450.32" />
                         <CardContent>
@@ -89,9 +81,7 @@ const CardComponent = () => {
                     </Card>
 
                 </Grid>
-                <Grid item xs={1}>
-
-                </Grid>
+              
                 </Grid>
             </Grid>
         </Box>

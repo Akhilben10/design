@@ -41,10 +41,8 @@ const ChartComponent = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
-                <Grid item xs={1}>
-
-                </Grid>
-                <Grid item xs={7.5}>
+            
+                <Grid item xs={8}>
 
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -71,16 +69,13 @@ const ChartComponent = () => {
                     </ Grid>
 
                 </Grid>
-                <Grid item xs={2.5}>
+                <Grid item xs={4}>
                     <Card>
                         <PieChartComponent />
                     </Card>
 
                 </Grid>
-                <Grid item xs={1}>
-
-
-                </Grid>
+                
             </Grid>
         </Box>
 

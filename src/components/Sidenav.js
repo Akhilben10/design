@@ -28,11 +28,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import './Sidenav.css';
+import { BrowserRouter as Router, Routes, Route , NavLink } from "react-router-dom";
 import SpeedIcon from '@mui/icons-material/Speed';
 import Theme from '@mui/icons-material';
 import { makeStyles } from '@material-ui/core';
 import { Hidden } from '@mui/material';
-
+import Statistics from '../RouterComponents/Statistics';
+import Users from '../RouterComponents/Users';
+import {useNavigate} from "react-router-dom"
 
 const drawerWidth = 240;
 
@@ -110,11 +113,11 @@ const useStyles = makeStyles((theam)=>({
   }
 }))
 export default function Sidenav() {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [menudata, setMenudata] = useState("Default");
+  // const [menudata, setMenudata] = useState("Default");
   const classes= useStyles()
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -125,7 +128,7 @@ export default function Sidenav() {
 
   const handleClick = (text) => {
     console.log('fffffffffffff', text)
-    setMenudata(text)
+    navigate(`/${text}`)
   }
   // const styles = (theme: Theme) =>
   // createStyles({
@@ -150,7 +153,7 @@ export default function Sidenav() {
         <AppBar position="fixed" elevation={4} sx={{ backgroundColor: "#ffffff", color: "#2f2f2f" }}>
           <Toolbar>
             <Typography variant="h6" noWrap component="div">
-              <img src="./icons/berry.jpg" className='Header-logo' />
+              {/* <img src="./icons/berry.jpg" className='Header-logo' /> */}
 
             </Typography>
             <h2 className='berry'>GM Test</h2>
@@ -162,7 +165,7 @@ export default function Sidenav() {
               edge="start"
 
             >
-              <div className='menu'><MenuIcon sx={{ fontSize: "28px" }} className='zoombutton' /></div>
+              <div className='menu'><MenuIcon className='zoombutton' /></div>
 
             </IconButton>
             <PrimarySearchAppBar />
@@ -176,7 +179,7 @@ export default function Sidenav() {
                 <ZoomOutMapIcon sx={{ fontSize: "28px" }} className='zoombutton' />
               </IconButton>
 
-              <IconButton  >
+              <IconButton onClick={() => {navigate('/users')}} >
                 <AccountCircleIcon sx={{ fontSize: "28px" }} className='zoombutton' />
               </IconButton>
 
@@ -196,7 +199,7 @@ export default function Sidenav() {
           </DrawerHeader>
           <Divider />
           <List>
-            {['Default', 'Analytics'].map((text, index) => (
+            {['Home', 'Analytics'].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: 'block' }} onClick={() => handleClick(text)}>
                 <ListItemButton
                   sx={{
@@ -246,7 +249,7 @@ export default function Sidenav() {
           </List>
           <Divider />
           <List>
-            {['Users', 'Customer', 'Chat', 'Kanban', 'Mail', "Calendar", "Contact", "E-commerce"].map((text, index) => (
+            {['users', 'Customer', 'Chat', 'Kanban', 'Mail', "Calendar", "Contact", "E-commerce"].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: 'block' }} onClick={() => handleClick(text)}>
                 <ListItemButton
                   sx={{
@@ -428,12 +431,24 @@ export default function Sidenav() {
 
         </Drawer> */}
         <Box component="main" sx={{ flexGrow: 1, p: 3  , mt:6}}>
-          {
+        <Routes>
+        <Route path='/analytics' exact  element={<Analytics />}/>
+        <Route path='/home' exact element={<Ddefault />}/>
+        <Route path='/Statistics' exact element={<Statistics />}/>
+        <Route path='/users' exact element={<Users />}/>
+      </Routes>
+          {/* {
             menudata === "Analytics" && <Analytics />
           }
           {
             menudata === "Default" && <Ddefault />
           }
+          {
+            menudata === "Statistics" && <Statistics />
+          }
+          {
+            menudata === "Users" &&  <Users/>
+          } */}
         </Box>
       </Box>
     </>

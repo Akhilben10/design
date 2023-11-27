@@ -59,7 +59,7 @@ export default function PermanentDrawerLeft() {
                       >
                         <Avatar>
                           <img
-                            // src="./icons/download.jpg"
+                            //src="./icons/download.jpg"
                             //imageUrl="https://berrydashboard.io/assets/avatar-1-8ab8bc8e.png"
                             style={{ width: "100%", height: "100%" }}
                           />

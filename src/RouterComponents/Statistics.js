@@ -11,8 +11,6 @@ function Statistics() {
 
             <iframe title="Claims Pareto Link" src={"https://app.powerbi.com/view?r=eyJrIjoiNGU3NzQxMDYtZjlhYy00YWNlLTg5ZDEtZjNhMjJiZmI4YmQ2IiwidCI6ImE5ZTRlYjg3LWY4OTAtNGE3My05YTYwLTRiMmVjZGI3ZWY4YiJ9&embedImagePlaceholder=true"} width="100%" height="450"></iframe>
         </Grid>
-
-
     )
 }
 

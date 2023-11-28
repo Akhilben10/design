@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "./components/Sidebar";
+//import Sidebar from "./components/Sidebar";
 import MiniDrawer from "./components/Sidenav";
 import Statistics from "./RouterComponents/Statistics";
 
@@ -19,8 +19,9 @@ import Ddefault from "./RouterComponents/Default";
 import Sidenav from "./components/Sidenav";
 import Users from "./RouterComponents/Users";
 import Chatbot from "react-chatbot-kit";
-import PermanentDrawerLeft from "./components/ChatBotComponent/ChatInbox";
-import Simplechatbot from "./components/ChatBotComponent/Chatbot";
+import SimpleChatbott from "./components/ChatBotComponent/ChatPage";
+//import Simplechatbot from "./components/ChatBotComponent/Chatbot";
+//import SimpleChatbott from "./components/ChatBotComponent/ChatPage";
 
 // import Header from './components/Header';
 

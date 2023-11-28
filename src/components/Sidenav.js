@@ -47,7 +47,10 @@ import { SiPowerbi } from "react-icons/si";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
 import Simplechatbot from "./ChatBotComponent/Chatbot";
-import PermanentDrawerLeft from "./ChatBotComponent/ChatInbox";
+
+import GroupIcon from "@mui/icons-material/Group";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import ChatPage from "./ChatBotComponent/ChatPage";
 
 const drawerWidth = 240;
 
@@ -253,6 +256,7 @@ export default function Sidenav() {
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
+                <Divider />
               </ListItem>
             ))}
           </List>
@@ -267,8 +271,48 @@ export default function Sidenav() {
               >
                 <ListItemButton
                   sx={{
+                    minHeight: 0, // Set minHeight to 0 to remove top and bottom padding
+                    justifyContent: open ? "initial" : "center",
+                    padding: 0,
+                    px: 2.5,
+                    "&:hover": {
+                      backgroundColor: "#ede7f6",
+                      borderRadius: "15px",
+                    },
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto", // Adjust the right margin for spacing
+                      justifyContent: "center",
+                      "&:hover": {
+                        color: "#YourHoverColor", // Set the same hover color for both icons
+                      },
+                    }}
+                  >
+                    {index % 2 === 0 ? <SiPowerbi /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+
+          {/* <List>
+            {["Power-bi"].map((text, index) => (
+              <ListItem
+                key={text}
+                disablePadding
+                sx={{ display: "block" }}
+                onClick={() => handleClick(text)}
+              >
+                <ListItemButton
+                  sx={{
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
+                    padding: 0,
                     px: 2.5,
                     "&:hover": {
                       backgroundColor: "#ede7f6",
@@ -289,7 +333,7 @@ export default function Sidenav() {
                 </ListItemButton>
               </ListItem>
             ))}
-          </List>
+          </List> */}
 
           <List>
             {["users", "Chat-user"].map((text, index) => (
@@ -317,10 +361,11 @@ export default function Sidenav() {
                       justifyContent: "center",
                     }}
                   >
-                    {index % 2 === 0 ? <PermIdentityIcon /> : <MailIcon />}
+                    {index % 2 === 0 ? <GroupIcon /> : <QuestionAnswerIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
+                <Divider />
               </ListItem>
             ))}
           </List>
@@ -355,6 +400,7 @@ export default function Sidenav() {
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
+                <Divider />
               </ListItem>
             ))}
           </List>
@@ -366,7 +412,7 @@ export default function Sidenav() {
             <Route path="/home" element={<Ddefault />} />
             <Route path="/power-bi" element={<Statistics />} />
             <Route path="/users" element={<Users />} />
-            <Route path="/Chat-user" element={<PermanentDrawerLeft />} />
+            <Route path="/Chat-user" element={<ChatPage />} />
           </Routes>
         </Box>
       </Box>

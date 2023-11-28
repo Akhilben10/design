@@ -31,10 +31,10 @@ const Simplechatbot = ({ clickedText }) => {
     <div>
       <ChatBot
         headerTitle={clickedText}
-        speechSynthesis={{ enable: false, lang: "en" }}
+        speechSynthesis={{ enable: true, lang: "en" }}
         //
-        contentStyle={{ maxHeight: "350px", marginTop: "5px" }}
-        style={{ maxHeight: "450px", width: "600px" }}
+        //contentStyle={{ maxHeight: "400px" }}
+        style={{ width: "600px" }}
         steps={steps}
       />
     </div>

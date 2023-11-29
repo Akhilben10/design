@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { styled } from "@mui/material/styles";
 import {
   Container,
@@ -18,6 +18,8 @@ import {
   CardContent,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import SendIcon from "@mui/icons-material/Send";
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -30,70 +32,147 @@ const ChatPage = () => {
   const [selectedContact, setSelectedContact] = useState(null);
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const messagesContainerRef = useRef(null);
 
   const handleContactClick = (contactName) => {
+    setMessages([]);
     setSelectedContact(contactName);
   };
+  useEffect(() => {
+    // Scroll to the bottom of the messages container when messages change
+    messagesContainerRef.current.scrollTop =
+      messagesContainerRef.current.scrollHeight;
+  }, [messages]);
 
   const handleSendMessage = () => {
     if (messageInput.trim() === "") {
       return; // Ignore sending empty messages
     }
 
-    const newMessage = {
+    const userMessage = {
       content: messageInput,
       sender: "You", // You can modify this based on your requirements
     };
 
-    setMessages([...messages, newMessage]);
+    const botReplay = {
+      content: generateBotReply(messageInput),
+    };
+
+    setMessages([...messages, userMessage, botReplay]);
     setMessageInput("");
   };
 
-  return (
-    <Grid container spacing={2} style={{ height: "100vh", display: "flex" }}>
-      {/* <Grid item xs={12}>
-        <Card>
-          <CardContent
+  const generateBotReply = (userMessage) => {
+    switch (userMessage.toLowerCase()) {
+      case "hi":
+      case "hello":
+        return (
+          <div
             style={{
-              background: "#f8fafc",
+              textAlign: "left",
+              // border: "1px solid red",
+              padding: "15px",
+              // backgroundColor: "coral",
+              paddingLeft: "15px",
             }}
           >
-            <h1>Cards</h1>
-          </CardContent>
-        </Card>
-      </Grid> */}
+            "Hello! How can i help you today?"
+          </div>
+        );
 
-      <Grid item xs={4} style={{ height: "100vh" }}>
+      case "how are you":
+        return (
+          <div style={{ textAlign: "left", paddingLeft: "15px" }}>
+            "I'm just a bot , but thanks for asking! How can I assist you?"
+          </div>
+        );
+      default:
+        return (
+          <div style={{ textAlign: "left", paddingLeft: "15px" }}>
+            "I didn't quite understand that . Can you please clarify?"
+          </div>
+        );
+    }
+  };
+
+  return (
+    <Grid container spacing={2} style={{ height: "80vh", display: "flex" }}>
+      <Grid item xs={4} style={{ height: "87.5vh" }}>
         {/* <Item>xs</Item> */}
 
-        <Paper>
+        <Paper style={{ height: "85vh" }}>
           {/* Chat List 1 */}
           <List>
-            <ListItem button onClick={() => handleContactClick("Akhil")}>
+            <ListItem
+              button
+              onClick={() => handleContactClick("Akhil")}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#ede7f6",
+                  borderRadius: "15px",
+                },
+              }}
+            >
               <ListItemAvatar>
-                <Avatar src="profile1.jpg" alt="Profile" />
+                <Avatar src="./download.jpg" alt="Akhil" />
               </ListItemAvatar>
               <ListItemText primary="Akhil" />
             </ListItem>
-            <ListItem button onClick={() => handleContactClick("Kiran")}>
+            <ListItem
+              button
+              onClick={() => handleContactClick("Kiran")}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#ede7f6",
+                  borderRadius: "15px",
+                },
+              }}
+            >
               <ListItemAvatar>
-                <Avatar src="profile1.jpg" alt="Profile" />
+                <Avatar src="profile1.jpg" alt="Kiran" />
               </ListItemAvatar>
               <ListItemText primary="Kiran" />
             </ListItem>
-            <ListItem button onClick={() => handleContactClick("Monika")}>
+            <ListItem
+              button
+              onClick={() => handleContactClick("Monika")}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#ede7f6",
+                  borderRadius: "15px",
+                },
+              }}
+            >
               <ListItemAvatar>
-                <Avatar src="profile1.jpg" alt="Profile" />
+                <Avatar src="profile1.jpg" alt="M" />
               </ListItemAvatar>
               <ListItemText primary="Monika" />
             </ListItem>
-            <ListItem button onClick={() => handleContactClick("Jyoti")}>
+            <ListItem
+              button
+              onClick={() => handleContactClick("Jyoti")}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#ede7f6",
+                  borderRadius: "15px",
+                },
+              }}
+            >
               <ListItemAvatar>
-                <Avatar src="profile1.jpg" alt="Profile" />
+                <Avatar src="profile1.jpg" alt="J" />
               </ListItemAvatar>
               <ListItemText primary="Jyoti" />
             </ListItem>
-            <ListItem button onClick={() => handleContactClick("Pritesh")}>
+            <ListItem
+              button
+              onClick={() => handleContactClick("Pritesh")}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "#ede7f6",
+                  borderRadius: "15px",
+                },
+              }}
+            >
               <ListItemAvatar>
                 <Avatar src="profile1.jpg" alt="Profile" />
               </ListItemAvatar>
@@ -112,30 +191,42 @@ const ChatPage = () => {
           position: "relative",
         }}
       >
-        <Item sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <Item sx={{ flex: 1, display: "flex", flexDirection: "column", p: 0 }}>
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
               p: 1,
               m: 1,
-              bgcolor: "background.paper",
               borderRadius: 1,
               borderBottom: "solid",
             }}
           >
             <div style={{ display: "flex" }}>
               <Avatar alt="Selected Profile" />
-              <h2 style={{ margin: "5px" }}>
-                {selectedContact || "Select a contact"}
-              </h2>
+              <h2 style={{ margin: "5px" }}>{selectedContact || "Akhil"}</h2>
             </div>
             <IconButton>
               <MoreVertIcon />
             </IconButton>
           </Box>
           <Grid>
-            <Grid>
+            <Grid
+              ref={messagesContainerRef}
+              sx={{
+                overflowY: "auto",
+                flex: 1,
+                p: 0,
+                maxHeight: "58vh", // Set max height as needed
+                scrollBehavior: "smooth", // Enable smooth scrolling
+                "&::-webkit-scrollbar": {
+                  width: "0.4em", // Adjust as needed
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor: "rgba(0, 0, 0, 0)", // Set to transparent to hide the thumb
+                },
+              }}
+            >
               {messages.map((message, index) => (
                 <div
                   key={index}
@@ -146,11 +237,17 @@ const ChatPage = () => {
                   <div
                     style={{
                       textAlign: "right",
+                      paddingRight: "15px",
                       fontWeight: "bold",
                       fontSize: "15px",
+                      // border: "1px solid red",
+                      // backgroundColor: "coral",
+                      paddingLeft: "5px",
+                      paddingRight: "5px",
+                      // marginLeft: "500px",
                     }}
                   >
-                    {selectedContact || "Select a contact"}: {message.content}
+                    {message.content}
                   </div>
                 </div>
               ))}
@@ -159,7 +256,7 @@ const ChatPage = () => {
               sx={{
                 position: "absolute",
                 bottom: "0px",
-                width: "96%",
+                width: "98%",
                 display: "flex",
               }}
             >
@@ -169,6 +266,13 @@ const ChatPage = () => {
                 placeholder="Type a message"
                 value={messageInput}
                 onChange={(e) => setMessageInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSendMessage();
+                  }
+                }}
+
+                // onChange={(e) => setMessageInput(e.target.value)}
               />
               <Button
                 sx={{ width: "30%" }}
@@ -176,6 +280,7 @@ const ChatPage = () => {
                 color="primary"
                 fullWidth
                 onClick={handleSendMessage}
+                endIcon={<SendIcon />}
               >
                 Send
               </Button>

@@ -10,7 +10,6 @@ function Users() {
   return (
     <div>
       <br />
-      <br />
       <Grid
         container
         spacing={2}

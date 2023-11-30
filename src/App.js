@@ -20,6 +20,7 @@ import Sidenav from "./components/Sidenav";
 import Users from "./RouterComponents/Users";
 import Chatbot from "react-chatbot-kit";
 import SimpleChatbott from "./components/ChatBotComponent/ChatPage";
+import UserCard2 from "./components/CardComponent/UserCard2";
 
 //import Simplechatbot from "./components/ChatBotComponent/Chatbot";
 //import SimpleChatbott from "./components/ChatBotComponent/ChatPage";
@@ -39,6 +40,7 @@ function App() {
   return (
     <div classes={{ paper: classes.drawerPaper }}>
       <Sidenav />
+      {/* <UserCard2 /> */}
     </div>
   );
 }

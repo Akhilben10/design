@@ -51,6 +51,7 @@ import Simplechatbot from "./ChatBotComponent/Chatbot";
 import GroupIcon from "@mui/icons-material/Group";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import ChatPage from "./ChatBotComponent/ChatPage";
+import User2 from "../RouterComponents/User2";
 
 const drawerWidth = 240;
 
@@ -371,7 +372,7 @@ export default function Sidenav() {
           </List>
           <Divider />
           <List>
-            {[].map((text, index) => (
+            {["User2"].map((text, index) => (
               <ListItem
                 key={text}
                 disablePadding
@@ -406,13 +407,14 @@ export default function Sidenav() {
           </List>
         </Drawer>
 
-        <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 6 }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 7 }}>
           <Routes>
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/home" element={<Ddefault />} />
             <Route path="/power-bi" element={<Statistics />} />
             <Route path="/users" element={<Users />} />
             <Route path="/Chat-user" element={<ChatPage />} />
+            <Route path="/user2" element={<User2 />} />
           </Routes>
         </Box>
       </Box>

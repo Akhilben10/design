@@ -407,7 +407,17 @@ export default function Sidenav() {
           </List>
         </Drawer>
 
-        <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 7 }}>
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            mt: 7,
+            overflow: "hidden",
+            height: "100%",
+            width: "100%",
+          }}
+        >
           <Routes>
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/home" element={<Ddefault />} />

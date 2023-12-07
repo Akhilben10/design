@@ -36,7 +36,7 @@ import {
 } from "react-router-dom";
 
 import HomeIcon from "@mui/icons-material/Home";
-import Theme from "@mui/icons-material";
+import Theme, { Login } from "@mui/icons-material";
 import { makeStyles } from "@material-ui/core";
 import { Hidden } from "@mui/material";
 import Statistics from "../RouterComponents/Statistics";
@@ -52,6 +52,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import ChatPage from "./ChatBotComponent/ChatPage";
 import User2 from "../RouterComponents/User2";
+import LoginForm from "../RouterComponents/Login";
 
 const drawerWidth = 240;
 
@@ -301,47 +302,17 @@ export default function Sidenav() {
           </List>
           <Divider />
 
-          {/* <List>
-            {["Power-bi"].map((text, index) => (
-              <ListItem
-                key={text}
-                disablePadding
-                sx={{ display: "block" }}
-                onClick={() => handleClick(text)}
-              >
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    padding: 0,
-                    px: 2.5,
-                    "&:hover": {
-                      backgroundColor: "#ede7f6",
-                      borderRadius: "15px",
-                    },
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {index % 2 === 0 ? <SiPowerbi /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List> */}
-
           <List>
             {["users", "Chat-user"].map((text, index) => (
               <ListItem
                 key={text}
                 disablePadding
-                sx={{ display: "block" }}
+                sx={{
+                  display: "block",
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                  borderBottom: "1px solid #transparent",
+                }}
                 onClick={() => handleClick(text)}
               >
                 <ListItemButton
@@ -349,6 +320,7 @@ export default function Sidenav() {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
+
                     "&:hover": {
                       backgroundColor: "#ede7f6",
                       borderRadius: "15px",
@@ -366,17 +338,22 @@ export default function Sidenav() {
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
-                <Divider />
+                <Divider sx={{ marginTop: 0 }} />
               </ListItem>
             ))}
           </List>
-          <Divider />
+
           <List>
             {["User2"].map((text, index) => (
               <ListItem
                 key={text}
                 disablePadding
-                sx={{ display: "block" }}
+                sx={{
+                  display: "block",
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                  borderBottom: "1px solid #transparent",
+                }}
                 onClick={() => handleClick(text)}
               >
                 <ListItemButton
@@ -384,6 +361,7 @@ export default function Sidenav() {
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
+
                     "&:hover": {
                       backgroundColor: "#ede7f6",
                       borderRadius: "15px",
@@ -401,7 +379,7 @@ export default function Sidenav() {
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
-                <Divider />
+                <Divider sx={{ marginTop: 0 }} />
               </ListItem>
             ))}
           </List>
@@ -425,6 +403,7 @@ export default function Sidenav() {
             <Route path="/users" element={<Users />} />
             <Route path="/Chat-user" element={<ChatPage />} />
             <Route path="/user2" element={<User2 />} />
+            {/* // <Route path="/login" element={<LoginForm />} /> */}
           </Routes>
         </Box>
       </Box>

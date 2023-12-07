@@ -25,19 +25,48 @@ import {
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SendIcon from "@mui/icons-material/Send";
-const UserMessageBubble = ({ content }) => (
+
+const getCurrentDate = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth() + 1).toString().padStart(2, "0");
+  const day = now
+    .getDate()
+    .toString()
+    .padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+const formatMessageTime = (timestamp) => {
+  const time = new Date(timestamp);
+  return time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+};
+
+const getCurrentTime = () => {
+  const now = new Date();
+  const hours = now
+    .getHours()
+    .toString()
+    .padStart(2, "0");
+  const minutes = now
+    .getMinutes()
+    .toString()
+    .padStart(2, "0");
+  return `${hours}:${minutes}`;
+};
+
+const MessageBubble = ({ content, timestamp, sender }) => (
   <div
     style={{
-      textAlign: "right",
-      paddingRight: "15px",
-      paddingBottom: "5px",
+      textAlign: sender === "You" ? "right" : "left",
+      padding: sender === "You" ? "0 15px 5px 0" : "0 0 5px 15px",
     }}
   >
     <div
       style={{
         display: "inline-block",
-        backgroundColor: "#3f51b5",
-        color: "#fff",
+        backgroundColor: sender === "You" ? "#3f51b5" : "#e0e0e0",
+        color: sender === "You" ? "#fff" : "black",
         padding: "10px",
         borderRadius: "10px",
         maxWidth: "70%",
@@ -46,28 +75,14 @@ const UserMessageBubble = ({ content }) => (
     >
       {content}
     </div>
-  </div>
-);
-
-const BotMessageBubble = ({ content }) => (
-  <div
-    style={{
-      textAlign: "left",
-      paddingLeft: "15px",
-      paddingBottom: "5px",
-    }}
-  >
     <div
       style={{
-        display: "inline-block",
-        backgroundColor: "#e0e0e0",
-        padding: "10px",
-        borderRadius: "10px",
-        maxWidth: "70%",
-        wordWrap: "break-word",
+        textAlign: sender === "You" ? "right" : "left",
+        color: "#999",
+        fontSize: "10px",
       }}
     >
-      {content}
+      {`${formatMessageTime(timestamp)}`}
     </div>
   </div>
 );
@@ -84,13 +99,15 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
   },
 }));
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
-  padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
+  overflowY: "auto",
 }));
+
 const ChatPage = () => {
   const [selectedContact, setSelectedContact] = useState("Akhil");
   const [messageInput, setMessageInput] = useState("");
@@ -127,6 +144,7 @@ const ChatPage = () => {
     const userMessage = {
       content: messageInput,
       sender: "You",
+      timestamp: new Date().toISOString(),
     };
 
     const updatedMessages = [...messages, userMessage];
@@ -152,6 +170,7 @@ const ChatPage = () => {
       const botMessage = {
         content: botReply,
         sender: "Bot",
+        timestamp: new Date().toISOString(),
       };
 
       const updatedMessagesWithBotReply = [...updatedMessages, botMessage];
@@ -198,6 +217,7 @@ const ChatPage = () => {
         return "I didn't quite understand that. Can you please clarify?";
     }
   };
+
   const avatarUrls = {
     Akhil: "https://berrydashboard.io/assets/avatar-1-8ab8bc8e.png",
     Kiran: "https://berrydashboard.io/assets/avatar-5-e6a74d73.png",
@@ -205,7 +225,9 @@ const ChatPage = () => {
     Jyoti: "https://berrydashboard.io/assets/avatar-6-66774242.png",
     Pritesh: "https://berrydashboard.io/assets/avatar-4-3b96be4a.png",
   };
+
   console.log("jhgfd", messages);
+
   const classes = useStyles();
 
   return (
@@ -256,7 +278,6 @@ const ChatPage = () => {
           >
             <div style={{ display: "flex" }}>
               <Avatar src={avatarUrls[selectedContact]} alt={selectedContact} />
-
               <h2 style={{ margin: "5px" }}>{selectedContact || "Akhil"}</h2>
             </div>
             <IconButton onClick={handleMoreVertClick}>
@@ -281,49 +302,6 @@ const ChatPage = () => {
               marginBottom: "90px",
             }}
           >
-            {/* <Grid
-              ref={messagesContainerRef}
-              className={classes.messageContainer}
-              sx={{
-                overflowY: "auto",
-                flex: 1,
-                p: 0,
-                maxHeight: "58vh", // Set max height as needed
-                scrollBehavior: "smooth", // Enable smooth scrolling
-                "&::-webkit-scrollbar": {
-                  width: "0.4em", // Adjust as needed
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  backgroundColor: "rgba(0, 0, 0, 0)", // Set to transparent to hide the thumb
-                },
-              }}
-            >
-              {messages?.map((message, index) => (
-                <div
-                  key={index}
-                  className={`${
-                    message.sender === "You" ? "text-end bg-gray" : ""
-                  }`}
-                >
-                  <div
-                    style={{
-                      textAlign: message.sender === "You" ? "right" : "left",
-                      paddingRight: "15px",
-                      fontWeight: "bold",
-                      fontSize: "15px",
-                      // border: "1px solid red",
-                      // backgroundColor: "coral",
-                      paddingLeft: "15px",
-                      // paddingRight: "5px",
-                      // marginLeft: "500px",
-                    }}
-                  >
-                    {message.content}
-                  </div>
-                </div>
-              ))}
-            </Grid> */}
-
             <Grid
               ref={messagesContainerRef}
               className={classes.messageContainer}
@@ -331,9 +309,17 @@ const ChatPage = () => {
               {messages?.map((message, index) => (
                 <div key={index}>
                   {message.sender === "You" ? (
-                    <UserMessageBubble content={message.content} />
+                    <MessageBubble
+                      content={message.content}
+                      timestamp={message.timestamp}
+                      sender={message.sender}
+                    />
                   ) : (
-                    <BotMessageBubble content={message.content} />
+                    <MessageBubble
+                      content={message.content}
+                      timestamp={message.timestamp}
+                      sender={message.sender}
+                    />
                   )}
                 </div>
               ))}
@@ -386,4 +372,5 @@ const ChatPage = () => {
     </Grid>
   );
 };
+
 export default ChatPage;

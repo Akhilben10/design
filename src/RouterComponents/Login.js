@@ -8,20 +8,13 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (username.trim() !== "" && password.trim() !== "") {
+    if (username == "gm" && password == "exl") {
+      localStorage.setItem("isLogedin", true);
       navigate("/home");
+    } else {
+      alert("Invalid credentials");
     }
   };
-  // In a real application, you would send a request to the server for authentication.
-  //     if (username === "akhil" && password === "ben") {
-  //       console.log("aaaa");
-  //       localStorage.setItem("isLogedin", true);
-  //       navigate("/home");
-  //     } else {
-  //       alert("invalid");
-  //       localStorage.setItem("isLogedin", false);
-  //     }
-  //   };
 
   return (
     <div

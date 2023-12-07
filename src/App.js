@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 //import Sidebar from "./components/Sidebar";
 import MiniDrawer from "./components/Sidenav";
 import Statistics from "./RouterComponents/Statistics";
@@ -11,6 +12,7 @@ import {
   NavLink,
   Navigate,
   useLocation,
+  useNavigate,
 } from "react-router-dom";
 import Analytics from "./RouterComponents/Analytics";
 import Box from "@mui/material/Box";
@@ -24,16 +26,12 @@ import Chatbot from "react-chatbot-kit";
 import SimpleChatbott from "./components/ChatBotComponent/ChatPage";
 import UserCard2 from "./components/CardComponent/UserCard2";
 import LoginForm from "./RouterComponents/Login";
-
-//import Simplechatbot from "./components/ChatBotComponent/Chatbot";
-//import SimpleChatbott from "./components/ChatBotComponent/ChatPage";
-
-// import Header from './components/Header';
+import User2 from "./RouterComponents/User2";
+import ChatPage from "./components/ChatBotComponent/ChatPage";
 
 function App() {
   const location = useLocation();
-
-  // Access the pathname, search, and hash properties of the location object
+  const navigate = useNavigate();
   const pathname = location.pathname;
   const search = location.search;
   const hash = location.hash;
@@ -50,36 +48,31 @@ function App() {
   const classes = useStyles();
   const token = localStorage.getItem("isLogedin");
   console.log("akhil_token", token);
-
+  useEffect(() => {
+    if (!token || token === "false") {
+      navigate("/login");
+    } else if (pathname == "/design" && token === "true") {
+      navigate("/home");
+    } else if (pathname == "/login" && token === "true") {
+      navigate("/home");
+    }
+  }, [token, navigate]);
   return (
-    <div classes={{ paper: classes.drawerPaper }}>
-      <Sidenav />
-
-      {/* {token == true ? <Sidenav /> : <LoginForm />} */}
-    </div>
+    <Routes>
+      {token ? (
+        <Route path="/" element={<Sidenav />}>
+          <Route index element={<Navigate to="/analytics" />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="/home" element={<Ddefault />} />
+          <Route path="/power-bi" element={<Statistics />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/Chat-user" element={<ChatPage />} />
+          <Route path="/user2" element={<User2 />} />
+        </Route>
+      ) : (
+        <Route path="/login" element={<LoginForm />} />
+      )}
+    </Routes>
   );
 }
 export default App;
-{
-  /* <Routes>
-        <Route
-          path="/design"
-          element={() => {
-            const pathnamee = pathname == "/design" && "/login";
-            return <Navigate to={pathnamee} replace />;
-          }}
-        />
-        <Route path="/login" element={<LoginForm />} />
-        <Route
-          path="/"
-          element={({ location }) => {
-            // Use the isTokenPresent function to conditionally set the destination
-            const destination = token == "true" ? "/main" : "/login";
-
-            // Render the Navigate component with the dynamically determined destination
-            return <Navigate to={destination} replace />;
-          }}
-        />
-        <Route path="/main" element={<Sidenav />} />
-      </Routes> */
-}

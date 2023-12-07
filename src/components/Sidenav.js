@@ -1,6 +1,16 @@
 // import * as React from 'react';
 import { useState } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import {
+  styled,
+  useTheme,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
+
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -52,6 +62,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import ChatPage from "./ChatBotComponent/ChatPage";
 import User2 from "../RouterComponents/User2";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import LoginForm from "../RouterComponents/Login";
 
 const drawerWidth = 240;
@@ -148,6 +159,22 @@ export default function Sidenav() {
     navigate(`/${text.toLowerCase()}`);
   };
 
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+  const handleLogout = () => {
+    localStorage.removeItem("isLogedin");
+    navigate("/login");
+  };
+  const handleLogoutDialogOpen = () => {
+    setLogoutDialogOpen(true);
+  };
+  const handleLogoutDialogClose = () => {
+    setLogoutDialogOpen(false);
+  };
+  const handleLogoutConfirmed = () => {
+    handleLogout();
+    handleLogoutDialogClose();
+  };
+
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -168,7 +195,6 @@ export default function Sidenav() {
               onClick={() => {
                 setOpen(!open);
               }}
-              // onClick={handleDrawerOpen}
               edge="start"
             >
               <MenuIcon className="zoombutton" />
@@ -201,14 +227,61 @@ export default function Sidenav() {
                 />
               </IconButton>
 
-              <IconButton>
+              {/* <IconButton>
                 <SettingsIcon
                   sx={{ fontSize: "28px" }}
                   className="zoombutton"
                 />
-              </IconButton>
+              </IconButton> */}
 
               <LastUpdatedTooltip />
+
+              <IconButton onClick={handleLogoutDialogOpen}>
+                <MoreVertIcon />
+              </IconButton>
+              <Dialog
+                open={logoutDialogOpen}
+                onClose={handleLogoutDialogClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                PaperProps={{
+                  style: {
+                    background: "linear-gradient(to right, #6a11cb, #2575fc)", // Customize this gradient as needed
+                    color: "white", // Set text color to contrast with the background
+                  },
+                }}
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Logout Confirmation"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText
+                    id="alert-dialog-description"
+                    style={{ color: "white" }}
+                  >
+                    Are you sure you want to logout?
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={handleLogoutDialogClose}
+                    color="primary"
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    No
+                  </Button>
+                  <Button
+                    onClick={handleLogoutConfirmed}
+                    color="primary"
+                    style={{ color: "white" }}
+                    autoFocus
+                  >
+                    Yes
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </div>
           </Toolbar>
         </AppBar>

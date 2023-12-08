@@ -28,6 +28,7 @@ import UserCard2 from "./components/CardComponent/UserCard2";
 import LoginForm from "./RouterComponents/Login";
 import User2 from "./RouterComponents/User2";
 import ChatPage from "./components/ChatBotComponent/ChatPage";
+import MapContainer from "./RouterComponents/MapPage";
 
 function App() {
   const location = useLocation();
@@ -68,6 +69,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/Chat-user" element={<ChatPage />} />
           <Route path="/user2" element={<User2 />} />
+          <Route path="/map-page" element={<MapContainer />} />
         </Route>
       ) : (
         <Route path="/login" element={<LoginForm />} />

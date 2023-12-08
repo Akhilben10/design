@@ -42,7 +42,7 @@ function UserCard2({ imageUrl, name, status }) {
           <Avatar
             src={imageUrl}
             alt="iujhygf"
-            sx={{ height: "100%", width: "30%" }}
+            sx={{ height: "100%", width: "31%" }}
           />
 
           <MoreHorizIcon />

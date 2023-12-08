@@ -64,6 +64,8 @@ import ChatPage from "./ChatBotComponent/ChatPage";
 import User2 from "../RouterComponents/User2";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import LoginForm from "../RouterComponents/Login";
+import MapContainer from "../RouterComponents/MapPage";
+import MapIcon from "@mui/icons-material/Map";
 
 const drawerWidth = 240;
 
@@ -246,8 +248,8 @@ export default function Sidenav() {
                 aria-describedby="alert-dialog-description"
                 PaperProps={{
                   style: {
-                    background: "linear-gradient(to right, #6a11cb, #2575fc)", // Customize this gradient as needed
-                    color: "white", // Set text color to contrast with the background
+                    background: "linear-gradient(to right, #6a11cb, #2575fc)",
+                    color: "white",
                   },
                 }}
               >
@@ -417,7 +419,7 @@ export default function Sidenav() {
           </List>
 
           <List>
-            {["User2"].map((text, index) => (
+            {["User2", "Map-page"].map((text, index) => (
               <ListItem
                 key={text}
                 disablePadding
@@ -448,7 +450,7 @@ export default function Sidenav() {
                       justifyContent: "center",
                     }}
                   >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {index % 2 === 0 ? <InboxIcon /> : <MapIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
@@ -463,7 +465,7 @@ export default function Sidenav() {
           sx={{
             flexGrow: 1,
             p: 3,
-            mt: 7,
+            mt: 8,
             overflow: "hidden",
             height: "100%",
             width: "100%",
@@ -476,6 +478,7 @@ export default function Sidenav() {
             <Route path="/users" element={<Users />} />
             <Route path="/Chat-user" element={<ChatPage />} />
             <Route path="/user2" element={<User2 />} />
+            <Route path="/Map-page" element={<MapContainer />} />
             {/* // <Route path="/login" element={<LoginForm />} /> */}
           </Routes>
         </Box>

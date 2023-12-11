@@ -3,6 +3,10 @@ import { styled } from "@mui/material/styles";
 import InputAdornment from "@mui/material/InputAdornment";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { makeStyles } from "@mui/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 
 import {
   Container,
@@ -93,8 +97,8 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     maxHeight: "58vh",
     scrollBehavior: "smooth",
-    wordWrap: "break-word", // Add this line
-    width: "100%", // Add this line to set maximum width
+    wordWrap: "break-word",
+    width: "100%",
     overflow: "hidden",
     flexWrap: "wrap",
   },
@@ -115,8 +119,35 @@ const ChatPage = () => {
   const messagesContainerRef = useRef(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [showDeleteOption, setShowDeleteOption] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-  // Load chat history from local storage when the component mounts
+  useEffect(() => {
+    messagesContainerRef.current.scrollTop =
+      messagesContainerRef.current.scrollHeight;
+  }, [messages]);
+  useEffect(() => {
+    messagesContainerRef.current.scrollTop =
+      messagesContainerRef.current.scrollHeight;
+  }, []);
+
+  const handleOpenDeleteDialog = () => {
+    setIsDeleteDialogOpen(true);
+  };
+  const handleCloseDeleteDialog = () => {
+    setIsDeleteDialogOpen(false);
+  };
+  const handleDeleteChatConfirmed = () => {
+    localStorage.setItem(
+      "chats",
+      JSON.stringify({
+        ...JSON.parse(localStorage.getItem("chats")),
+        [selectedContact]: [],
+      })
+    );
+    setMessages([]);
+    handleCloseDeleteDialog();
+  };
+
   useEffect(() => {
     const storedChats = JSON.parse(localStorage.getItem("chats")) || [];
     setMessages(storedChats[selectedContact] || []);
@@ -138,7 +169,7 @@ const ChatPage = () => {
 
   const handleSendMessage = async () => {
     if (messageInput.trim() === "") {
-      return; // Ignore sending empty messages
+      return;
     }
 
     const userMessage = {
@@ -153,7 +184,6 @@ const ChatPage = () => {
 
     setMessageInput("");
 
-    // Simulate bot reply after sending user message with typing animation
     const botTypingMessage = {
       content: "Typing...",
       sender: "Bot",
@@ -164,7 +194,6 @@ const ChatPage = () => {
     setMessages(updatedMessagesWithTyping);
     saveChatToLocalStorage(selectedContact, updatedMessagesWithTyping);
 
-    // Simulate delay before bot's actual reply
     setTimeout(() => {
       const botReply = generateBotReply(messageInput);
       const botMessage = {
@@ -176,13 +205,12 @@ const ChatPage = () => {
       const updatedMessagesWithBotReply = [...updatedMessages, botMessage];
       setMessages(updatedMessagesWithBotReply);
       saveChatToLocalStorage(selectedContact, updatedMessagesWithBotReply);
-    }, 3000); // 3 seconds delay
+    }, 3000);
   };
 
   const handleMoreVertClick = (event) => {
     setAnchorEl(event.currentTarget);
 
-    // Check if the chat is not empty before showing the delete option
     if (messages.length > 0) {
       setShowDeleteOption(true);
     }
@@ -194,7 +222,6 @@ const ChatPage = () => {
   };
 
   const handleDeleteChat = () => {
-    // Implement logic to delete the entire chat for the selected contact
     localStorage.setItem(
       "chats",
       JSON.stringify({
@@ -289,11 +316,11 @@ const ChatPage = () => {
               onClose={handleMoreVertClose}
             >
               <MenuItem
-                onClick={handleDeleteChat}
+                onClick={handleOpenDeleteDialog}
                 disabled={messages.length === 0}
               >
+                <DeleteIcon style={{ marginRight: "8px" }} />
                 Delete Chat
-                <DeleteIcon style={{ marginLeft: "8px" }} />
               </MenuItem>
             </Menu>
           </Box>
@@ -369,6 +396,16 @@ const ChatPage = () => {
           </Grid>
         </Item>
       </Grid>
+      <Dialog open={isDeleteDialogOpen} onClose={handleCloseDeleteDialog}>
+        <DialogTitle>Confirmation</DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to delete this chat?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDeleteDialog}>No</Button>
+          <Button onClick={handleDeleteChatConfirmed}>Yes</Button>
+        </DialogActions>
+      </Dialog>
     </Grid>
   );
 };

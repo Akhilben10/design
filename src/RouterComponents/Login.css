@@ -1,3 +1,6 @@
-/* .input::placeholder {
+.input::placeholder {
   color: white;
-} */
+}
+.loginButton:hover {
+  background: linear-gradient(to right, #ffffff, #8e44ad);
+}

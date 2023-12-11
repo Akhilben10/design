@@ -66,6 +66,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import LoginForm from "../RouterComponents/Login";
 import MapContainer from "../RouterComponents/MapPage";
 import MapIcon from "@mui/icons-material/Map";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
 
 const drawerWidth = 240;
 
@@ -211,13 +213,6 @@ export default function Sidenav() {
                 />
               </IconButton>
 
-              <IconButton>
-                <ZoomOutMapIcon
-                  sx={{ fontSize: "28px" }}
-                  className="zoombutton"
-                />
-              </IconButton>
-
               <IconButton
                 onClick={() => {
                   navigate("/users");
@@ -239,7 +234,7 @@ export default function Sidenav() {
               <LastUpdatedTooltip />
 
               <IconButton onClick={handleLogoutDialogOpen}>
-                <MoreVertIcon />
+                <LogoutIcon />
               </IconButton>
               <Dialog
                 open={logoutDialogOpen}
@@ -303,7 +298,7 @@ export default function Sidenav() {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <List>
+          <List sx={{ paddingBottom: "0px", paddingTop: "0px" }}>
             {["Home", "Analytics"].map((text, index) => (
               <ListItem
                 key={text}
@@ -338,7 +333,7 @@ export default function Sidenav() {
             ))}
           </List>
 
-          <List>
+          <List sx={{ paddingBottom: "0px", paddingTop: "0px" }}>
             {["Power-bi"].map((text, index) => (
               <ListItem
                 key={text}
@@ -377,7 +372,7 @@ export default function Sidenav() {
           </List>
           <Divider />
 
-          <List>
+          <List sx={{ paddingBottom: "0px", paddingTop: "0px" }}>
             {["users", "Chat-user"].map((text, index) => (
               <ListItem
                 key={text}
@@ -418,7 +413,7 @@ export default function Sidenav() {
             ))}
           </List>
 
-          <List>
+          <List sx={{ paddingBottom: "0px", paddingTop: "0px" }}>
             {["User2", "Map-page"].map((text, index) => (
               <ListItem
                 key={text}
@@ -450,7 +445,7 @@ export default function Sidenav() {
                       justifyContent: "center",
                     }}
                   >
-                    {index % 2 === 0 ? <InboxIcon /> : <MapIcon />}
+                    {index % 2 === 0 ? <PersonIcon /> : <MapIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>

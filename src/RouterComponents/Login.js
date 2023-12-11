@@ -8,7 +8,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (username == "gm" && password == "exl") {
+    if (username === "gm" && password === "exl") {
       localStorage.setItem("isLogedin", true);
       navigate("/home");
     } else {
@@ -73,6 +73,11 @@ const LoginForm = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleLogin();
+              }
+            }}
             style={{
               padding: "10px",
               borderRadius: "25px",
@@ -88,6 +93,7 @@ const LoginForm = () => {
         <button
           type="button"
           onClick={handleLogin}
+          className="loginButton"
           style={{
             padding: "10px",
             borderRadius: "25px",
@@ -95,6 +101,11 @@ const LoginForm = () => {
             color: "white", // White text color for the button
             border: "1px solid white", // White border for the button
             outline: "none", // Remove the black inner border on focus
+            // cursor: "pointer",
+            // transition: "background 0.3s",
+            // ":hover": {
+            //   background: "linear-gradient(to right , #ffffff , #8e44ad)",
+            // },
           }}
         >
           Login
